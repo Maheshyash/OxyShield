@@ -3,6 +3,7 @@ import React,{useState} from 'react'
 import Input from '../common/input'
 import CustomButton from '../common/CustomButton'
 import Container from '../common/container/Container'
+import CustomModal from '../CustomModal'
 const AddAccountInputFields = ({onChange,onSubmit, form , error}) => {
   return (
     <Container>
@@ -27,6 +28,7 @@ const AddAccountInputFields = ({onChange,onSubmit, form , error}) => {
         error = {error.company_name}
         value = {form.company_name}
         />
+        <CustomModal/>
         <CustomButton primary title = "Submit" onPress={onSubmit}/>
     </Container>
   )

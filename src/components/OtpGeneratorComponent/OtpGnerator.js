@@ -1,17 +1,18 @@
-import {ScrollView, View, Text, StyleSheet} from 'react-native';
+import {ScrollView, View, Text, StyleSheet, TouchableHighlight} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
-
+import colors from '../../assets/theme/colors'
 
 const OtpGnerator = ({userData})=> {
     // const secret_key = "ILQYFDXK4RZJMUWWPNWYJI2P4TK6H64U"
+    // console.log(userData,'userData')
   const userDetails = useSelector(state => state);
   const [sec, setsec] = useState()
   const totp = require('totp-generator');
   const date = new Date();
   const time1 = date.getTime();
-  const token = userData.secret_key
-    ? totp(userData.secret_key, {timestamp: time1})
+  const token = userData.item.secret_key
+    ? totp(userData.item.secret_key, {timestamp: time1})
     : '';
   const useProgress = () => {
     useEffect(() => {
@@ -34,12 +35,25 @@ const OtpGnerator = ({userData})=> {
   };
   var progress = useProgress();
   return (
-      <View style={styles.itemlist}>
-        <View>
-          <Text style={[styles.timer, {color: getTimerColor(sec)}]}>{progress}</Text>
+      // <View style={styles.itemlist}>
+      //   <View>
+      //     <Text style={[styles.timer, {color: getTimerColor(sec)}]}>{progress}</Text>
+      //   </View>
+      //   <Text style={styles.datas}>{token}</Text>
+      // </View>
+      <TouchableHighlight style={[styles.rowFrontVisible]}>
+        <View style={styles.rowContainer}>
+          <View style={{width:"15%",alignItems:'center',justifyContent:'center'}}>
+            <Text style={[styles.timer, {color: getTimerColor(sec)}]}>{progress}</Text>
+          </View>
+          <View style={{}}>
+            <Text style={[styles.datas]}>{token}</Text>
+            <Text style={{fontWeight:'900',color:colors.black, fontSize:18,marginLeft:11}}>{userData.item.application_name}</Text>
+            <Text style={{color:colors.black, fontSize:15,marginLeft:11}}>{userData.item.company_name}</Text>
+          </View>
         </View>
-        <Text style={styles.datas}>{token}</Text>
-      </View>
+      </TouchableHighlight>
+      // <View></View>
   );
 };
 
@@ -63,12 +77,35 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   datas: {
-    letterSpacing: 20,
+    letterSpacing: 15,
     fontSize: 30,
     color: '#000',
   },
   timer: {
     fontSize: 30,
     color: '#000',
+    // width:"15%"
   },
+  rowFrontVisible: {
+    backgroundColor: '#d4d2d2',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 15,
+    elevation: 5,
+    shadowColor: 'black',
+    marginLeft:5,
+    marginRight:5,
+    shadowOpacity: 0.1,
+    shadowOffset: {width: 0, height: 10},
+    shadowRadius: 20,
+  },
+  title: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: '#666',
+  },
+  rowContainer:{
+    flexDirection:'row'
+  }
 });

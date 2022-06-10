@@ -10,3 +10,9 @@ export const deleteSecretKeyUserData = () => {
         type:secretkeyActionTypes.DELETE_SECRET_KEY_USER_DATA,
     }
 }
+export const updateSecretKeyUserData = (data) => {
+    return{
+        type:secretkeyActionTypes.UPDATE_SECRET_KEY_USER_DATA,
+        payload:data
+    }
+}
