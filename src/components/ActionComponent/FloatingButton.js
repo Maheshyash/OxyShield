@@ -15,7 +15,6 @@ class FloatingButton extends Component {
     animation: new Animated.Value(0),
   };
   toggleOpen = () => {
-    // console.log(this.props)
     if (this._open) {
       Animated.timing(this.state.animation, {
         toValue: 0,

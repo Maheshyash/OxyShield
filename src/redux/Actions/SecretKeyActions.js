@@ -16,3 +16,14 @@ export const updateSecretKeyUserData = (data) => {
         payload:data
     }
 }
+export const setUserImageData = (data) => {
+    return{
+        type:secretkeyActionTypes.USER_IMAGE_DATA,
+        payload:data
+    }
+}
+export const clearImageData = () => {
+    return{
+        type:secretkeyActionTypes.CLEAR_IMAGE_DATA,
+    }
+}

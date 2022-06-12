@@ -31,12 +31,11 @@ const OtpGeneratorComponent = props => {
     key:`${index}`,
     secret_key:item.secret_key,
     application_name:item.application_name,
-    company_name:item.company_name
+    company_name:item.company_name,
+    image:item.image,
   }))
     )
   },[userDetails])
-  console.log(userDetails, 'userDetails');
-  console.log(userDetailsinfo, 'userDetailsinfo');
 
   // const renderItem = ({item}) => <OtpGenerator userData={item} />;
   let data = {
@@ -69,7 +68,6 @@ const OtpGeneratorComponent = props => {
   };
   // const VisibleItem = props => {
   //   const {data} = props;
-  //   console.log(data, 'data');
   //   return (
   //     <TouchableHighlight style={styles.rowFrontVisible}>
   //       <View>

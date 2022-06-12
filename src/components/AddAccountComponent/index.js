@@ -1,11 +1,12 @@
 import React,{useState, useEffect} from 'react'
 import FloatingButton from '../ActionComponent/FloatingButton'
 import { useNavigation } from '@react-navigation/native'
-import { setSecretKeyUserData } from '../../redux/Actions/SecretKeyActions'
+import { setSecretKeyUserData, clearImageData } from '../../redux/Actions/SecretKeyActions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import AddAccountInputFields from './AddAccountInputFields'
 const AddAccountComponent = (props) => {
+  const {ImageData} =props;
     const {navigate} = useNavigation();
     const [form, setForm] = useState({})
     const [error,setError] = useState({})
@@ -24,16 +25,13 @@ const AddAccountComponent = (props) => {
             //     setError((prev)=>({...prev,[name]:null}))
             // }
             if(name==='secret_key'){
-              console.log('inside secrete')
               if(!value.match(/^[A-Z2-7]+=*$/)){
                 // /^([a-z0-9]{5,})$/
-              console.log('inside secrete if')
 
                 setError((prev)=>({...prev, secret_key:"The Secret key must be base32"}))
                 return;
               }
               else{
-              console.log('inside secrete else')
 
                 setError((prev)=>({...prev,[name]:null}))
               }
@@ -68,11 +66,23 @@ const AddAccountComponent = (props) => {
         setError({})
         navigate("Home")
     }
-    useEffect(() => {
-        return () => {
-            console.log(form,error)
-        }
-    },[])
+    // useEffect(() => {
+    //     return () => {
+    //         props.clearImageData()
+    //     }
+    // },[])
+
+    useEffect(()=>{
+      if(ImageData.length>0){
+        const {application_name,image} =ImageData[0]
+        const keys = Object.keys(ImageData[0]);
+        setForm({...form,[keys[0]]:application_name,[keys[1]]:image})
+      }
+    },[ImageData])
+    useEffect(()=>{
+      console.log(form,'form')
+    },[form])
+
   return (
       <>
     <AddAccountInputFields 
@@ -86,9 +96,9 @@ const AddAccountComponent = (props) => {
   )
 }
 const mapDispatchToProps = dispatch =>({
-  ...bindActionCreators({setSecretKeyUserData},dispatch)
+  ...bindActionCreators({setSecretKeyUserData, clearImageData},dispatch)
 })
 const mapStateToProps = state =>({
-
+  ImageData:state.secreteData.userImageData
 })
 export default connect(mapStateToProps, mapDispatchToProps)(AddAccountComponent)

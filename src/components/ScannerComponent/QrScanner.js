@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 const QrScanner = (props) => {
     const navigation = useNavigation()
     const onSuccess = e => {
-      console.log(e, 'e data');
       var URLData =e.data
       var URLInfo = new URL(URLData);
       const secret_key = URLInfo.searchParams.get("secret")
@@ -27,6 +26,8 @@ const QrScanner = (props) => {
       <QRCodeScanner
         onRead={onSuccess}
         // flashMode={RNCamera.Constants.FlashMode.torch}
+        showMarker={true}
+        containerStyle={{flex:1}}
         topContent={
           <Text style={styles.centerText}>
             <Text style={styles.textBold}>Scan the Qr code</Text>
@@ -34,7 +35,7 @@ const QrScanner = (props) => {
         }
         bottomContent={
           <TouchableOpacity style={styles.buttonTouchable}>
-            <Text style={styles.buttonText} onPress={()=>navigation.navigate("SecretCode",{data:null})}>Manual Typing</Text>
+            <Text style={styles.buttonText} onPress={()=>navigation.navigate("SecretCode")}>Manual Typing</Text>
           </TouchableOpacity>
         }
       />

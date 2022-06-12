@@ -59,29 +59,3 @@ export function DrawerNavigation() {
       </Drawer.Navigator>
   );
 }
-
-
-const TabNavigator = (props) =>{
-    const data = useSelector(state=>state)
-    console.log(data)
-    return(<View><Text>TabNavigator</Text></View>)
-}
-const SettingsScreen = () =>{
-    return(<View><Text>SettingsScreen</Text></View>)
-}
-const MomentsScreen = () =>{
-    return(<View><Text>MomentsScreen</Text></View>)
-}
-const MessageScreen = () =>{
-    return(<View><Text>MessageScreen</Text></View>)
-}
-const ProfileScreens = () =>{
-    return(<View><Text>ProfileScreens</Text></View>)
-}
-
-const mapStateToProps = state =>{
-    return{
-        data:state
-    }
-}
-export default connect(mapStateToProps)(TabNavigator)

@@ -1,5 +1,5 @@
 import { View, Text,TouchableHighlight,TouchableOpacity,SafeAreaView,Modal, StyleSheet, Image } from 'react-native'
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import ModalPicker from './ModalPicker'
 const Options = [{application_name:'drishti',image:require('../../assets/images/drishti.png')},{application_name:'aristi',image:require('../../assets/images/aristi.jpg')},{application_name:'collaxy',image:require('../../assets/images/collaxy.jpg')}]
 const CustomModal = () => {
@@ -12,8 +12,14 @@ const CustomModal = () => {
     const setData = (data) => {
         setChooseData(data.application_name)
         setChooseImage(data.image)
-        console.log(data,'data')
     }
+    useEffect(()=>{
+      return () =>{
+        setChooseData("select item")
+        setChooseImage('')
+        console.log('leaving the custome Modal')
+      }
+    },[])
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={()=> changeModalVisibility(true)} style={styles.touchableOpacity}>
@@ -44,16 +50,20 @@ const styles = StyleSheet.create({
         backgroundColor:'grey',
         alignItems:'center',
         justifyContent:'center',
-        // padding:20,
+        padding:5,
+
     },
     text:{
-        marginVertical:20,
+        marginVertical:10,
         fontSize:25,
     },
     touchableOpacity:{
         // backgroundColor:'orange',
         alignSelf:'stretch',
         paddingHorizontal:20,
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'space-between'
         // marginHorizontal:20
     },
     image:{

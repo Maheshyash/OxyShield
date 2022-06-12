@@ -1,11 +1,10 @@
-import {ScrollView, View, Text, StyleSheet, TouchableHighlight} from 'react-native';
+import {ScrollView, View, Text, StyleSheet, TouchableHighlight,Image} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import colors from '../../assets/theme/colors'
 
 const OtpGnerator = ({userData})=> {
     // const secret_key = "ILQYFDXK4RZJMUWWPNWYJI2P4TK6H64U"
-    // console.log(userData,'userData')
   const userDetails = useSelector(state => state);
   const [sec, setsec] = useState()
   const totp = require('totp-generator');
@@ -51,6 +50,7 @@ const OtpGnerator = ({userData})=> {
             <Text style={{fontWeight:'900',color:colors.black, fontSize:18,marginLeft:11}}>{userData.item.application_name}</Text>
             <Text style={{color:colors.black, fontSize:15,marginLeft:11}}>{userData.item.company_name}</Text>
           </View>
+          <Image source={userData.item.image} style={styles.image}/>
         </View>
       </TouchableHighlight>
       // <View></View>
@@ -106,6 +106,14 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   rowContainer:{
-    flexDirection:'row'
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center'
+  },
+  image:{
+    borderRadius:25,
+    width:50,
+    height:50,
+    resizeMode: 'cover'
   }
 });
