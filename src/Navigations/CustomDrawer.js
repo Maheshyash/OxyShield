@@ -21,9 +21,9 @@ const CustomDrawer = (props) => {
                 {/* <FontAwesome5 name="coins" size={14} color="#fff"/>  */}
               </View>
           </ImageBackground>
-          <View style={{backgroundColor:"#fff"}}>
+          {/* <View style={{backgroundColor:"#fff"}}>
             <DrawerItemList {...props} />
-          </View>
+          </View> */}
       </DrawerContentScrollView>
       <View style={{padding:20, borderTopColor:'#ccc',borderTopWidth:2}}>
           {/* <TouchableOpacity style={{paddingVertical:15}}>
