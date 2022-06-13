@@ -13,7 +13,7 @@ const Drawer = createDrawerNavigator();
 export function DrawerNavigation() {
   return (
     <Drawer.Navigator
-        initialRouteName="Onbording"
+        initialRouteName="Home"
         screenOptions={{headerShown: false,
                         drawerActiveBackgroundColor:"#aa18ea",
                         drawerActiveTintColor:'#fff',

@@ -8,45 +8,45 @@ import {
   TouchableOpacity,
   TouchableHighlight,
 } from 'react-native';
-import React,{useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect, useSelector} from 'react-redux';
 import OtpGenerator from './OtpGnerator';
 import {bindActionCreators} from 'redux';
 import {
   setSecretKeyUserData,
   deleteSecretKeyUserData,
-  updateSecretKeyUserData
+  updateSecretKeyUserData,
 } from '../../redux/Actions/SecretKeyActions';
 import {SwipeListView} from 'react-native-swipe-list-view';
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import colors from '../../assets/theme/colors';
 const OtpGeneratorComponent = props => {
   const userDetails = useSelector(state => state.secreteData.userDetails);
   const state = useSelector(state => state);
-  const [userDetailsinfo, setUserDetailsinfo] = useState([])
-  useEffect(()=>{
+  const [userDetailsinfo, setUserDetailsinfo] = useState([]);
+  useEffect(() => {
     setUserDetailsinfo(
-      userDetails.length>0 &&
-    userDetails.map((item,index)=>({
-    key:`${index}`,
-    secret_key:item.secret_key,
-    application_name:item.application_name,
-    company_name:item.company_name,
-    image:item.image,
-  }))
-    )
-  },[userDetails])
+      userDetails.length > 0 &&
+        userDetails.map((item, index) => ({
+          key: `${index}`,
+          secret_key: item.secret_key,
+          application_name: item.application_name,
+          company_name: item.company_name,
+          image: item.image,
+        })),
+    );
+  }, [userDetails]);
 
   // const renderItem = ({item}) => <OtpGenerator userData={item} />;
   let data = {
     secret_key: 'ILQYFDXK4RZJMUWWPNWYJI2P4TK6H64U',
   };
   const closeRow = (rowMap, rowKey) => {
-    if(rowMap[rowKey]){
+    if (rowMap[rowKey]) {
       rowMap[rowKey].closeRow();
     }
   };
-  const [Dataa , setDataa] =useState([
+  const [Dataa, setDataa] = useState([
     {
       key: 1,
       name: 'mahesh',
@@ -57,12 +57,12 @@ const OtpGeneratorComponent = props => {
       name: 'mahesh royal',
       id: '2',
     },
-  ])
+  ]);
   const deleteRow = (rowMap, rowKey) => {
-    closeRow(rowMap,rowKey);
+    closeRow(rowMap, rowKey);
     const newData = [...userDetailsinfo];
-    const prevIndex = userDetailsinfo.findIndex(item=> item.key ===rowKey)
-    newData.splice(prevIndex,1);
+    const prevIndex = userDetailsinfo.findIndex(item => item.key === rowKey);
+    newData.splice(prevIndex, 1);
     setUserDetailsinfo(newData);
     props.updateSecretKeyUserData(newData);
   };
@@ -88,13 +88,25 @@ const OtpGeneratorComponent = props => {
       <View style={styles.rowBack}>
         <Text>Left</Text>
         <TouchableOpacity
-          style={[styles.backRightBtn, styles.backRightBtnLeft]} onPress={onClose}>
+          style={[styles.backRightBtn, styles.backRightBtnLeft]}
+          onPress={onClose}>
           {/* <Text>Close</Text> */}
-        <Ionicons name='close-circle-outline' size={22} color={colors.white} style={styles.trash}/>
+          <Ionicons
+            name="close-circle-outline"
+            size={22}
+            color={colors.white}
+            style={styles.trash}
+          />
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={onDelete}>
-          <Ionicons name='trash' size={22} color={colors.white} style={styles.trash}/>
+          style={[styles.backRightBtn, styles.backRightBtnRight]}
+          onPress={onDelete}>
+          <Ionicons
+            name="trash"
+            size={22}
+            color={colors.white}
+            style={styles.trash}
+          />
         </TouchableOpacity>
       </View>
     );
@@ -111,27 +123,31 @@ const OtpGeneratorComponent = props => {
   };
 
   return (
-    <View style={{flex:1}}>
-
-      {userDetailsinfo.length > 0 ? 
-        (<SwipeListView 
-        data={userDetailsinfo}
-        renderItem={renderItem}
-        renderHiddenItem={renderHiddenItem}
-        leftOpenValue={75}
-        rightOpenValue={-150}
-        disableRightSwipe={true}
-        scrollEnabled={true}
-      />)
-        :(<View><Text>No data</Text></View>)
-    }
+    <View style={{flex: 1}}>
+      {userDetailsinfo.length > 0 ? (
+        <SwipeListView
+          data={userDetailsinfo}
+          renderItem={renderItem}
+          renderHiddenItem={renderHiddenItem}
+          leftOpenValue={75}
+          rightOpenValue={-150}
+          disableRightSwipe={true}
+          scrollEnabled={true}
+        />
+      ) : (
+        <View style={{flex:1,alignItems:'center'}}>
+          <Text style={{fontSize:24,color:'black',fontWeight:'600', marginBottom:10}}>WelCome 👋</Text>
+          <Text style={{fontSize:20,color:'black',marginBottom:10}}>This app Helps you to easily setup and maange 2-factor authentication for your accounts.</Text>
+          <Text style={{fontSize:20,color:'black'}}>Use the <Text style={{fontSize:24,fontWeight:'800'}}>+</Text> button below to <Text style={{fontWeight:'800'}}>SCAN a QR- code</Text> or <Text style={{fontWeight:'800'}}>Enter your token manually</Text></Text>
+        </View>
+      )}
     </View>
   );
 };
 
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(
-    {setSecretKeyUserData, deleteSecretKeyUserData,updateSecretKeyUserData},
+    {setSecretKeyUserData, deleteSecretKeyUserData, updateSecretKeyUserData},
     dispatch,
   ),
 });
