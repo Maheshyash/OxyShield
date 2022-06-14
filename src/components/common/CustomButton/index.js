@@ -3,19 +3,19 @@ import { View, Text, Button, TouchableOpacity, ActivityIndicator } from 'react-n
 import colors from '../../../assets/theme/colors';
 import styles from './styles';
 
-const CustomButton = ({ title, primary, seconday, danger, disabled, loading, ...props }) => {
+const CustomButton = ({ title, primary, secondory, danger, disabled, loading, ...props }) => {
     // const [focused, setFocused] = useState(false);
      const getBgColor = () => {
          if(disabled){
              return colors.grey
          }
         if (primary) {
-            return colors.primary
+            return colors.primary1
         }
         if (danger) {
             return colors.danger
-        } if(seconday) {
-            return colors.secondary
+        } if(secondory) {
+            return colors.secondary1
         }
     }
     return (
@@ -23,7 +23,7 @@ const CustomButton = ({ title, primary, seconday, danger, disabled, loading, ...
             <View style={styles.loaderSection}>
                 {loading&&<ActivityIndicator  color={colors.primary}/>}
             {title && <Text style={{color
-            : disabled ? 'black':colors.white}}>{title}</Text>}
+            : disabled ? 'black':colors.white,fontSize:20}}>{title}</Text>}
             </View>
             
         </TouchableOpacity>

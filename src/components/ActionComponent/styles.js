@@ -1,6 +1,7 @@
 import {
     StyleSheet,
   } from 'react-native';
+import colors from '../../assets/theme/colors';
 const styles = StyleSheet.create({
     wrapper: {
       alignItems: 'center',
@@ -22,19 +23,19 @@ const styles = StyleSheet.create({
       shadowOffset: {height: 10},
     },
     menu: {
-      backgroundColor: '#016170',
+      backgroundColor: colors.secondary1,
     },
     secondary: {
       width: 50,
       height: 50,
       borderRadius: 50 / 2,
-      backgroundColor: '#009393',
+      backgroundColor: '#FF9F45',
     },
     additioncolor1: {
-      backgroundColor: '#00e0c6',
+      backgroundColor: '#FF9F45',
     },
     additioncolor2: {
-      backgroundColor: '#8dbafe',
+      backgroundColor: '#FF9F45',
     },
   });
 

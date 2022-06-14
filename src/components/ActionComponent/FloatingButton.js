@@ -89,22 +89,22 @@ class FloatingButton extends Component {
         {/* <Animated.View style={[styles.background]}> */}
           <TouchableWithoutFeedback onPress={() => {navigation.navigate('Home'),this.toggleOpen()}}>
             <Animated.View style={[styles.button, homeAnimation,styles.secondary, styles.additioncolor2]}>
-               <Ionicons name="home-outline" size={20} color="#000" />
+               <Ionicons name="home-outline" size={20} color="#fff" />
             </Animated.View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={() => {navigation.navigate('addAccount'),this.toggleOpen()}}>
             <Animated.View style={[styles.button, secureAnimation,styles.secondary,styles.additioncolor1]}>  
-              <MaterialIcons name="input" size={20} color="#000" />
+              <MaterialIcons name="input" size={20} color="#fff" />
             </Animated.View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={() =>{ navigation.navigate('scanner'),this.toggleOpen()}}>
             <Animated.View style={[styles.button, qrcodeanimation,styles.secondary]}>
-              <MaterialIcons name="qr-code" size={20} color="#000" />
+              <MaterialIcons name="qr-code" size={20} color="#fff" />
             </Animated.View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={() => this.toggleOpen()}>
             <Animated.View style={[styles.button,styles.menu,rotationAnimation]}>
-               <MaterialIcons name="add" size={24} color="#000" />
+               <MaterialIcons name="add" size={24} color="#fff" />
             </Animated.View>
           </TouchableWithoutFeedback>
         {/* </Animated.View> */}

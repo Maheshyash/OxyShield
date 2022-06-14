@@ -133,6 +133,9 @@ const OtpGeneratorComponent = props => {
           rightOpenValue={-150}
           disableRightSwipe={true}
           scrollEnabled={true}
+          ItemSeparatorComponent={()=>{return(
+            <View style={{backgroundColor:'orange',height:2,marginBottom:10,width:"95%",alignSelf:'center'}}/>
+          )}}
         />
       ) : (
         <View style={{flex:1,alignItems:'center'}}>

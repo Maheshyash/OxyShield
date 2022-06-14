@@ -1,4 +1,4 @@
-import { View, Text,StyleSheet,TouchableOpacity, Dimensions, ScrollView } from 'react-native'
+import { View, Text,StyleSheet,TouchableOpacity, Dimensions, ScrollView, Image } from 'react-native'
 import React from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { setUserImageData } from '../../redux/Actions/SecretKeyActions'
@@ -21,15 +21,17 @@ const ModalPicker = (props) => {
                 key={index}
             >
                 <Text style={styles.text}>{item.application_name}</Text>
+                <Image source={item.image}style={styles.image}/>
+
             </TouchableOpacity>
         )
     })
   return (
     <TouchableOpacity
-    // onPress={()=> props.changeModalVisibility(false)}
     style={styles.contianer}
+    onPress={()=>props.changeModalVisibility(false)}
     >
-      <Ionicons name="close-outline" size={32} onPress={()=>props.changeModalVisibility(false)} style={{alignSelf:'flex-end',backgroundColor:'yellow',borderRadius:16}}/>
+      <Ionicons name="close-outline" size={32} onPress={(e)=>{e.stopPropagation(),props.changeModalVisibility(false)}} style={{alignSelf:'flex-end',backgroundColor:'#a3bfe6',borderRadius:16}}/>
         <View style={[styles.modal,{width:WIDTH - 20, height:HEIGHT/2}]}>
             {option}
         </View>
@@ -48,18 +50,31 @@ const styles = StyleSheet.create({
     contianer:{
         flex:1,
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        // backgroundColor:"#a3bfe6"
     },
     modal:{
-        backgroundColor:'yellow',
+        backgroundColor:'#a3bfe6',
         borderRadius:10,
     },
     option:{
-        alignItems:'flex-start'
+        alignItems:'flex-start',
+        flexDirection:'row',
+        justifyContent:'space-around',
+        flex:1,
+        padding:10
     },
     text:{
         margin:20,
         fontSize:20,
-        fontWeight:'bold'
+        fontWeight:'bold',
+        color:'white',
+        fontWeight:''
+    },
+    image:{
+        borderRadius:10,
+        width:50,
+        height:50,
+        resizeMode: 'cover'
     }
 })

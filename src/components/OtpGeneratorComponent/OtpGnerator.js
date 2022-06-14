@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     // width:"15%"
   },
   rowFrontVisible: {
-    backgroundColor: '#d4d2d2',
+    backgroundColor: '#D7E9F7',
     borderRadius: 5,
     padding: 10,
     marginBottom: 15,

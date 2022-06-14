@@ -3,7 +3,7 @@ import React,{useEffect, useState} from 'react'
 import ModalPicker from './ModalPicker'
 const Options = [{application_name:'drishti',image:require('../../assets/images/drishti.png')},{application_name:'aristi',image:require('../../assets/images/aristi.jpg')},{application_name:'collaxy',image:require('../../assets/images/collaxy.jpg')}]
 const CustomModal = () => {
-    const [chooseData, setChooseData] = useState("select item")
+    const [chooseData, setChooseData] = useState("select your logo")
     const [chooseImage, setChooseImage] = useState('')
     const [isModalVisible, setIsModalVisible] = useState(false)
     const changeModalVisibility = (bool) =>{
@@ -15,7 +15,7 @@ const CustomModal = () => {
     }
     useEffect(()=>{
       return () =>{
-        setChooseData("select item")
+        setChooseData("select your logo")
         setChooseImage('')
         console.log('leaving the custome Modal')
       }
@@ -47,10 +47,11 @@ export default CustomModal
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        backgroundColor:'grey',
+        backgroundColor:'#DADDFC',
         alignItems:'center',
         justifyContent:'center',
         padding:5,
+        marginBottom:10
 
     },
     text:{

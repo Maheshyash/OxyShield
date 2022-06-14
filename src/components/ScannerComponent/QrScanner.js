@@ -1,4 +1,4 @@
-import {StyleSheet, View, Text, TouchableOpacity, Linking, Alert} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Linking, Alert, StatusBar} from 'react-native';
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { setSecretKeyUserData } from '../../redux/Actions/SecretKeyActions';
@@ -84,7 +84,7 @@ class QrScanner extends React.Component{
         >
           <BarcodeMask width={300} height={300} showAnimatedLine={true} outerMaskOpacity={0.5} animatedLineColor="green"/>
           <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
-            <View  style={styles.capture}>
+            <View  style={styles.header}>
               <Text style={{ fontSize: 24,color:'white' }}> Scan Qr-code </Text>
             </View>
         </View>
@@ -135,9 +135,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: 'black'
   },
-  capture: {
+  header: {
     flex: 1,
-    backgroundColor: 'grey',
+    backgroundColor: '#396EB0',
     // borderRadius: 5,
     padding: 15,
     paddingHorizontal: 20,
