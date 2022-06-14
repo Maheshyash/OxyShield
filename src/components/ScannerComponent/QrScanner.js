@@ -1,45 +1,91 @@
-import {StyleSheet, Text, TouchableOpacity, Linking} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Linking, Alert} from 'react-native';
 import React from 'react';
-import QRCodeScanner from 'react-native-qrcode-scanner';
-import { RNCamera } from 'react-native-camera';
-import { useNavigation } from '@react-navigation/native';
 import { bindActionCreators } from 'redux';
 import { setSecretKeyUserData } from '../../redux/Actions/SecretKeyActions';
 import { connect } from 'react-redux';
-const QrScanner = (props) => {
-    const navigation = useNavigation()
-    const onSuccess = e => {
-      var URLData =e.data
+import { RNCamera } from 'react-native-camera'
+import BarcodeMask from 'react-native-barcode-mask';
+import { useNavigation } from '@react-navigation/native';
+import { URL, URLSearchParams } from 'react-native-url-polyfill';
+class QrScanner extends React.Component{
+  constructor(props){
+    super(props)
+    this.camera=null
+    this.state={
+      isError:false
+    }
+  }
+  onFailure = () => {
+      this.setState({isError:true})
+      return Alert.alert(
+        "Alert",
+        "Invalid URL",
+        [
+          { text: "OK", onPress: () => this.setState({isError:false}) }
+        ]
+      );
+    }
+  onSuccess = e => {
+    if(e.hasOwnProperty('data')){
+      try{
+        var URLData = e.data;
       var URLInfo = new URL(URLData);
-      const secret_key = URLInfo.searchParams.get("secret")
-      const application_name = URLInfo.searchParams.get("appName")
-      const company_name = URLInfo.searchParams.get("appowner")
-    let userData = {
+      const secret_key = URLInfo.searchParams.get('secret');
+      const application_name = URLInfo.searchParams.get('AppName');
+      const company_name = URLInfo.searchParams.get('appowner');
+      if(secret_key==null) return this.onFailure();
+      else if(application_name==null) return this.onFailure();
+      else if(company_name==null) return this.onFailure();
+      let userData = {
         secret_key,
         application_name,
         company_name,
-    }
-    props.setSecretKeyUserData(userData)
-      navigation.navigate("Home")
+      };
+      console.log(userData,'userData')
+      props.setSecretKeyUserData(userData);
+      this.props.navigation.navigate('Home'); 
+
+      }
+      catch(err){
+        console.log('invalid url')
+        this.setState({isError:true})
+        Alert.alert(
+          "Alert",
+          "Invalid URL",
+          [
+            // {
+            //   text: "Cancel",
+            //   onPress: () => this.setState({isError:false}),
+            //   style: "cancel"
+            // },
+            { text: "OK", onPress: () => this.setState({isError:false}) }
+          ]
+        );
+      }
+    } 
   };
-    return (
-      <QRCodeScanner
-        onRead={onSuccess}
-        // flashMode={RNCamera.Constants.FlashMode.torch}
-        showMarker={true}
-        containerStyle={{flex:1}}
-        topContent={
-          <Text style={styles.centerText}>
-            <Text style={styles.textBold}>Scan the Qr code</Text>
-          </Text>
-        }
-        bottomContent={
-          <TouchableOpacity style={styles.buttonTouchable}>
-            <Text style={styles.buttonText} onPress={()=>navigation.navigate("SecretCode")}>Manual Typing</Text>
-          </TouchableOpacity>
-        }
-      />
-    );
+      
+      
+  render(){
+    return(
+      <View style={styles.container}>
+        {this.state.isError ==! true && <RNCamera
+          style={{ flex: 1, alignItems: 'center' }}
+          ref={ref => {
+            this.camera = ref
+          }}
+          onBarCodeRead={this.onSuccess}
+        >
+          <BarcodeMask width={300} height={300} showAnimatedLine={true} outerMaskOpacity={0.5} animatedLineColor="green"/>
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
+            <View  style={styles.capture}>
+              <Text style={{ fontSize: 24,color:'white' }}> Scan Qr-code </Text>
+            </View>
+        </View>
+        </RNCamera>}
+      </View>
+    )
+  }
 }
 const mapStateToProps = state =>({
     
@@ -47,26 +93,36 @@ const mapStateToProps = state =>({
 const mapDispatchToProps = dispatch =>({
     ...bindActionCreators({setSecretKeyUserData},dispatch)
 })
-export default connect(mapStateToProps, mapDispatchToProps)(QrScanner);
+const NavigationProvider = (Component) => {
+  const Wrapper = (props) => {
+    const navigation = useNavigation();
+    return (
+      <Component
+        navigation={navigation}
+        {...props}
+        />
+    );
+  };
+  
+  return Wrapper;
+};
+export default connect(mapStateToProps, mapDispatchToProps)(NavigationProvider(QrScanner));
 const styles = StyleSheet.create({
-  centerText: {
+  container: {
     flex: 1,
-    fontSize: 18,
-    padding: 32,
-    color: '#777',
+    flexDirection: 'column',
+    backgroundColor: 'black'
   },
-  textBold: {
-    fontWeight: '500',
-    color: '#000',
+  capture: {
+    flex: 1,
+    backgroundColor: 'grey',
+    // borderRadius: 5,
+    padding: 15,
+    paddingHorizontal: 20,
+    alignSelf: 'flex-start',
+    // margin: 20,
   },
-  buttonText: {
-    fontSize: 21,
-    color: 'rgb(0,122,255)',
-  },
-  buttonTouchable: {
-    padding: 16,
-  },
-});
+})
 
 
 

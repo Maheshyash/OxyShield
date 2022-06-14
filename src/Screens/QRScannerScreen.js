@@ -5,12 +5,7 @@ import FloatingButton from '../components/ActionComponent/FloatingButton'
 
 const QrScannerScreen = () => {
   return (
-    <>
-    <View>
       <QrCodeScannerComponent />
-    </View>
-    <FloatingButton />
-    </>
   )
 }
 
