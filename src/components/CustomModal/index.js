@@ -14,9 +14,9 @@ const CustomModal = () => {
         setChooseImage(data.image)
     }
     useEffect(()=>{
+      setChooseImage('')
+      setChooseData("select your logo")
       return () =>{
-        setChooseData("select your logo")
-        setChooseImage('')
         console.log('leaving the custome Modal')
       }
     },[])
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     },
     text:{
         marginVertical:10,
-        fontSize:25,
+        fontSize:18,
     },
     touchableOpacity:{
         // backgroundColor:'orange',

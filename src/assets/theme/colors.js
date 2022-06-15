@@ -8,5 +8,5 @@ export default {
     white:"#ffffff",
     black:"#000",
     primary1:"#396EB0",
-    secondary1:"#F76E11"
+    secondary1:"#db5226"
 }

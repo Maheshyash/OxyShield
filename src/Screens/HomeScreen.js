@@ -5,7 +5,7 @@ import {useRoute} from '@react-navigation/native';
 import FloatingButton from '../components/ActionComponent/FloatingButton';
 import OtpGeneratorComponent from '../components/OtpGeneratorComponent';
 import HeaderComponent from '../components/HeaderComponent/Header';
-const HomeScreen = () => {
+const HomeScreen = (props) => {
   const navigation = useNavigation();
   const route = useRoute();
 
@@ -15,7 +15,10 @@ const HomeScreen = () => {
       <View style={styles.container}>
         <OtpGeneratorComponent />
       </View>
-      <FloatingButton />
+      <FloatingButton 
+        navigation={props.navigation}
+      />
+      {/* <FloatingActions navigation={props.navigation}/> */}
     </>
   );
 };

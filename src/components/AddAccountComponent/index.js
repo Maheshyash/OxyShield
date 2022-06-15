@@ -80,8 +80,10 @@ const AddAccountComponent = (props) => {
       }
     },[ImageData])
     useEffect(()=>{
-      console.log(form,'form')
-    },[form])
+      // console.log(form,'form')
+      setForm({})
+      setError({})
+    },[])
 
   return (
       <>
@@ -91,7 +93,7 @@ const AddAccountComponent = (props) => {
         onSubmit = {onSubmit}
         onChange = {onChange}
     />
-    <FloatingButton/>
+    {/* <FloatingButton/> */}
     </>
   )
 }

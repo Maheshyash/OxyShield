@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import Home from '../Screens/HomeScreen';
 import QrScannerScreen from '../Screens/QRScannerScreen';
 import AddAccountScreen from '../Screens/AddAccountScreen';
+import AppStack from './AppStack';
 const Drawer = createDrawerNavigator();
 
 export function DrawerNavigation() {
@@ -21,7 +22,7 @@ export function DrawerNavigation() {
                         drawerLabelStyle:{marginLeft:-25,fontSize:15}}}
         drawerContent={(props)=> <CustomDrawer {...props}/>}
         >
-        <Drawer.Screen name="Home" component={Home} 
+        {/* <Drawer.Screen name="Home" component={Home} 
             options={{
                 drawerIcon:({color})=>(
                     <Ionicons name="home-outline" size={22} color={color}/>
@@ -41,21 +42,8 @@ export function DrawerNavigation() {
                     <Ionicons name="create" size={22} color={color}/>
                 )
             }}
-        />
-        {/* <Drawer.Screen name="moments" component={MomentsScreen} 
-            options={{
-                drawerIcon:({color})=>(
-                    <Ionicons name="timer-outline" size={22} color={color}/>
-                )
-            }}
-        />
-        <Drawer.Screen name="settings" component={SettingsScreen} 
-            options={{
-                drawerIcon:({color})=>(
-                    <Ionicons name="settings-outline" size={22} color={color}/>
-                )
-            }}
         /> */}
+        <Drawer.Screen name="StackNavigation" component={AppStack}/>
       </Drawer.Navigator>
   );
 }

@@ -1,10 +1,31 @@
 import { View, Text,StyleSheet,TouchableOpacity, Dimensions, ScrollView, Image } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { setUserImageData } from '../../redux/Actions/SecretKeyActions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-const Options = [{application_name:'drishti',image:require('../../assets/images/drishti.png')},{application_name:'aristi',image:require('../../assets/images/aristi.jpg')},{application_name:'collaxy',image:require('../../assets/images/collaxy.jpg')}]
+const Options = [
+  {
+    application_name: 'drishti',
+    image: require('../../assets/images/drishti.png'),
+  },
+  {
+    application_name: 'aristi',
+    image: require('../../assets/images/aristi.png'),
+  },
+  {
+    application_name: 'flowxy',
+    image: require('../../assets/images/flowxy.png'),
+  },
+  {
+    application_name: 'leap',
+    image: require('../../assets/images/leap.png'),
+  },
+//   {
+//     application_name: 'CAC',
+//     image: require('../../assets/images/favicon.ico'),
+//   },
+];
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const ModalPicker = (props) => {
@@ -31,11 +52,10 @@ const ModalPicker = (props) => {
     style={styles.contianer}
     onPress={()=>props.changeModalVisibility(false)}
     >
-      <Ionicons name="close-outline" size={32} onPress={(e)=>{e.stopPropagation(),props.changeModalVisibility(false)}} style={{alignSelf:'flex-end',backgroundColor:'#a3bfe6',borderRadius:16}}/>
         <View style={[styles.modal,{width:WIDTH - 20, height:HEIGHT/2}]}>
+        <Ionicons name="close-outline" size={32} onPress={(e)=>{e.stopPropagation(),props.changeModalVisibility(false)}} style={{alignSelf:'flex-end',backgroundColor:'#a3bfe6',borderRadius:16,paddingRight:15,color:'red'}}/>
             {option}
-        </View>
-        
+        </View>    
     </TouchableOpacity>
   )
 }
@@ -58,11 +78,11 @@ const styles = StyleSheet.create({
         borderRadius:10,
     },
     option:{
-        alignItems:'flex-start',
+        alignItems:'center',
         flexDirection:'row',
-        justifyContent:'space-around',
-        flex:1,
-        padding:10
+        justifyContent:'space-between',
+        // flex:1,
+        paddingHorizontal:20
     },
     text:{
         margin:20,

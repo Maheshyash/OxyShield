@@ -23,7 +23,7 @@ const CustomButton = ({ title, primary, secondory, danger, disabled, loading, ..
             <View style={styles.loaderSection}>
                 {loading&&<ActivityIndicator  color={colors.primary}/>}
             {title && <Text style={{color
-            : disabled ? 'black':colors.white,fontSize:20}}>{title}</Text>}
+            : disabled ? 'black':colors.white,fontSize:16}}>{title}</Text>}
             </View>
             
         </TouchableOpacity>

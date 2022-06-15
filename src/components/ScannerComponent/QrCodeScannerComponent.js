@@ -3,11 +3,12 @@ import React from 'react'
 import QrScanner from './QrScanner'
 import FloatingButton from '../ActionComponent/FloatingButton'
 
-const QrCodeScannerComponent = () => {
+const QrCodeScannerComponent = ({props}) => {
+  console.log(props,'props inside QrCodeScannerComponent')
   return (
     <>
-      <QrScanner />
-      <FloatingButton />
+      <QrScanner navigation={props.navigation}/>
+      {/* <FloatingButton /> */}
     </>
   )
 }

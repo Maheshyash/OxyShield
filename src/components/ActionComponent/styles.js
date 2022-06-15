@@ -29,13 +29,13 @@ const styles = StyleSheet.create({
       width: 50,
       height: 50,
       borderRadius: 50 / 2,
-      backgroundColor: '#FF9F45',
+      backgroundColor: '#ee6a36',
     },
     additioncolor1: {
-      backgroundColor: '#FF9F45',
+      backgroundColor: '#f47d54',
     },
     additioncolor2: {
-      backgroundColor: '#FF9F45',
+      backgroundColor: '#f58b6d',
     },
   });
 

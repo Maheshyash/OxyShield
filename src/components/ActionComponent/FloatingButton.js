@@ -11,6 +11,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 class FloatingButton extends Component {
+  constructor(props){
+    super(props)
+  }
   state = {
     animation: new Animated.Value(0),
   };
@@ -87,17 +90,17 @@ class FloatingButton extends Component {
     return (
       <View style={styles.wrapper}>
         {/* <Animated.View style={[styles.background]}> */}
-          <TouchableWithoutFeedback onPress={() => {navigation.navigate('Home'),this.toggleOpen()}}>
+          <TouchableWithoutFeedback onPress={() => {navigation.replace('Home'),this.toggleOpen()}}>
             <Animated.View style={[styles.button, homeAnimation,styles.secondary, styles.additioncolor2]}>
                <Ionicons name="home-outline" size={20} color="#fff" />
             </Animated.View>
           </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback onPress={() => {navigation.navigate('addAccount'),this.toggleOpen()}}>
+          <TouchableWithoutFeedback onPress={() => {navigation.replace('addAccount'),this.toggleOpen()}}>
             <Animated.View style={[styles.button, secureAnimation,styles.secondary,styles.additioncolor1]}>  
               <MaterialIcons name="input" size={20} color="#fff" />
             </Animated.View>
           </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback onPress={() =>{ navigation.navigate('scanner'),this.toggleOpen()}}>
+          <TouchableWithoutFeedback onPress={() =>{ navigation.replace('scanner'),this.toggleOpen()}}>
             <Animated.View style={[styles.button, qrcodeanimation,styles.secondary]}>
               <MaterialIcons name="qr-code" size={20} color="#fff" />
             </Animated.View>
@@ -112,17 +115,17 @@ class FloatingButton extends Component {
     );
   }
 }
-const NavigationProvider = (Component) => {
-  const Wrapper = (props) => {
-    const navigation = useNavigation();
-    return (
-      <Component
-        navigation={navigation}
-        {...props}
-        />
-    );
-  };
+// const NavigationProvider = (Component) => {
+//   const Wrapper = (props) => {
+//     const navigation = useNavigation();
+//     return (
+//       <Component
+//         navigation={navigation}
+//         {...props}
+//         />
+//     );
+//   };
   
-  return Wrapper;
-};
-export default NavigationProvider(FloatingButton)
+//   return Wrapper;
+// };
+export default (FloatingButton)
